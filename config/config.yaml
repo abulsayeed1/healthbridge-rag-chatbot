@@ -1,0 +1,68 @@
+project: ucsf-rag-chatbot
+seed: 633
+
+crawl:
+  base_url: https://www.ucsfhealth.org
+  sitemap: https://www.ucsfhealth.org/sitemap.xml
+  user_agent: "MSAI633-RAGBot/0.1 (student research project; +mailto:{email})"
+  min_delay_seconds: 1.0          # <= 1 request/second; robots Crawl-delay wins if larger
+  max_documents: 400
+  timeout_seconds: 20
+  allow_prefixes:
+    - /patients-visitors
+    - /about
+    - /terms-policies
+    - /covid
+    - /locations
+  locations_sample_size: 70
+  pdf_hosts:
+    - edge.sitecorecloud.io
+  deny_prefixes:
+    - /providers
+    - /mychart
+    - /care
+    - /health-articles
+  deny_title_patterns:
+    - "find a doctor"
+    - "our team"
+    - "staff directory"
+  raw_dir: data/raw
+
+extract:
+  normalized_dir: data/normalized
+  boilerplate_paragraph_max_doc_share: 0.30
+
+chunking:
+  tokenizer: cl100k_base
+  strategies:
+    fx512o64: {type: fixed, size: 512, overlap: 64}
+    sa-v1: {type: structure, max_tokens: 512, min_tokens: 80}
+  active: fx512o64
+
+embedding:
+  model: BAAI/bge-base-en-v1.5
+  dimension: 768
+  normalize: true
+  metric: cosine
+  query_prefix: "Represent this sentence for searching relevant passages: "
+
+vector_store:
+  path: data/index/chroma
+  collection: ucsf_chunks
+
+retrieval:
+  mode: hybrid            # dense | bm25 | hybrid
+  pool_size: 30
+  rrf_k: 60
+
+rerank:
+  model: BAAI/bge-reranker-base
+  top_k: 5
+  evidence_threshold: null   # tuned on dev split
+
+generation:
+  model: llama3.1
+  temperature: 0
+  max_tokens: 600
+  max_quote_words: 25
+  history_turns: 6
