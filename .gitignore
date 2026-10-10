@@ -1,0 +1,14 @@
+# secrets - never commit (proposal risk R9)
+.env
+
+# pipeline data dirs (raw crawl / indexes); data/golden_sources/ is intentionally tracked (eval corpus)
+data/raw/
+data/normalized/
+data/chunks/
+data/index/
+data/planted/
+
+logs/
+__pycache__/
+*.pyc
+.DS_Store
