@@ -1,0 +1,16 @@
+# Report 04: Hybrid Retrieval and Vector Storage
+
+## 2. Hybrid Search Engine (Sai)
+A purely dense (semantic) search is excellent at understanding intent, but it frequently fails at exact keyword matching (e.g., retrieving specific doctors' names, building numbers, or obscure medical terms). To solve this, we implemented a **Hybrid Search** engine (`src/ragbot/retrieve/retrievers.py`).
+
+Our system executes two parallel searches for every user query:
+1. **Dense Search:** Uses ChromaDB and the `bge-base` embeddings to find chunks that *mean* the same thing as the query.
+2. **Sparse Search (BM25):** Uses an in-memory BM25 index (TF-IDF based) to find chunks that contain the *exact keywords* of the query.
+
+## 3. Reciprocal Rank Fusion (RRF)
+Merging the results of a dense search and a sparse search is mathematically challenging because their scores are on completely different scales (Cosine Distance vs. BM25 scores). 
+
+To seamlessly merge them, we implemented **Reciprocal Rank Fusion (RRF)**. RRF ignores the raw scores and instead relies solely on the document's *rank* in each respective list. 
+
+The formula we used is: `RRF Score = 1 / (k + rank)` where `k` is a smoothing constant (we used 60).
+If a UCSF webpage ranked #1 in the Dense Search and #4 in the Sparse Search, its RRF score combines both, bubbling it to the absolute top of the final retrieved list. This hybrid approach guarantees that our pipeline excels at both conceptual understanding and exact entity retrieval.
