@@ -39,13 +39,13 @@ Add an AI-assistance note to the report/README when committing (same as the prop
 
 | Member | Items (7 each) |
 |---|---|
-| Shabbar | gs-001, gs-008, gs-015, gs-022, gs-029, gs-036, gs-043 |
-| Ravalika | gs-002, gs-009, gs-016, gs-023, gs-030, gs-037, gs-044 |
-| Hasan | gs-003, gs-010, gs-017, gs-024, gs-031, gs-038, gs-045 |
-| Harsha | gs-004, gs-011, gs-018, gs-025, gs-032, gs-039, gs-046 |
-| Sai | gs-005, gs-012, gs-019, gs-026, gs-033, gs-040, gs-047 |
-| Manish | gs-006, gs-013, gs-020, gs-027, gs-034, gs-041, gs-048 |
-| Zaineb | gs-007, gs-014, gs-021, gs-028, gs-035, gs-042, gs-049 |
+| Shabbar | G001, G008, G015, G022, G029, G036, G043 |
+| Ravalika | G002, G009, G016, G023, G030, G037, G044 |
+| Hasan | G003, G010, G017, G024, G031, G038, G045 |
+| Harsha | G004, G011, G018, G025, G032, G039, G046 |
+| Sai | G005, G012, G019, G026, G033, G040, G047 |
+| Manish | G006, G013, G020, G027, G034, G041, G048 |
+| Zaineb | G007, G014, G021, G028, G035, G042, G049 |
 
 ## Spares (if an item fails verification, swap in one of these)
 
