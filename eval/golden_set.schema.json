@@ -2,81 +2,18 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Golden evaluation item (one JSON object per line in golden_set.jsonl)",
   "type": "object",
-  "required": [
-    "id",
-    "category",
-    "question",
-    "author",
-    "verifier",
-    "verified_at"
-  ],
+  "required": ["id", "category", "question", "author", "verifier", "verified_at"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^G[0-9]{3}$"
-    },
-    "category": {
-      "enum": [
-        "single_hop",
-        "multi_hop",
-        "comparative",
-        "temporal",
-        "unanswerable",
-        "ambiguous_adversarial"
-      ]
-    },
-    "question": {
-      "type": "string"
-    },
-    "gold_answer": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "source_urls": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "format": "uri"
-      }
-    },
-    "evidence_quotes": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "<=25 words each, verbatim from the page"
-    },
-    "searched_for": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Required for unanswerable items: what was searched and where"
-    },
-    "expected_behavior": {
-      "enum": [
-        "answer",
-        "refuse",
-        "clarify",
-        "refuse_and_refer"
-      ]
-    },
-    "author": {
-      "type": "string"
-    },
-    "verifier": {
-      "type": "string",
-      "description": "Must differ from author"
-    },
-    "verified_at": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date-time",
-      "description": "Set by verifier when verified; null until then"
-    }
+    "id": {"type": "string", "pattern": "^G[0-9]{3}$"},
+    "category": {"enum": ["single_hop", "multi_hop", "comparative", "temporal", "unanswerable", "ambiguous_adversarial"]},
+    "question": {"type": "string"},
+    "gold_answer": {"type": ["string", "null"]},
+    "source_urls": {"type": "array", "items": {"type": "string", "format": "uri"}},
+    "evidence_quotes": {"type": "array", "items": {"type": "string"}, "description": "<=25 words each, verbatim from the page"},
+    "searched_for": {"type": ["string", "null"], "description": "Required for unanswerable items: what was searched and where"},
+    "expected_behavior": {"enum": ["answer", "refuse", "clarify", "refuse_and_refer"]},
+    "author": {"type": "string"},
+    "verifier": {"type": "string", "description": "Must differ from author"},
+    "verified_at": {"type": "string", "format": "date-time"}
   }
 }
